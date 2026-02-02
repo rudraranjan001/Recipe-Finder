@@ -2,7 +2,7 @@ require('dotenv').config();
 const express = require('express');
 const connectDB = require('./config/db')
 const colors = require('colors')
-const cors = require(cors);
+const cors = require('cors');
 
 connectDB();
 const app = express();
@@ -15,7 +15,7 @@ app.use('/api/users',require('./routes/userRoutes'));
 //userRoutes handle the request comes to api/users
 
 
-const port = env.PORT || 5002;
+const port = process.env.PORT || 5002;
 
 app.get('/',(req,res) =>{
 
