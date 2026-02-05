@@ -1,5 +1,5 @@
-import React from 'react'
-import { useEffect } from 'react'
+// import  from 'react'
+import React ,{ useEffect,useState } from 'react'
 import { searchRecipe } from './services/recipeService'
 
 function App() {
@@ -8,7 +8,7 @@ function App() {
     const fetchInitialRecipes = async () => {
       console.log('Fetching initial data...');;
 
-      const recipe = await searchRecipe('pasta');
+      const recipe = await searchRecipe("Chicken");
 
       console.log('Fetched Recipes :',recipe);
       
