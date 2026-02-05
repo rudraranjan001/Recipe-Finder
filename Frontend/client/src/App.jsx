@@ -1,6 +1,10 @@
 // import  from 'react'
 import React ,{ useEffect,useState } from 'react'
 import { searchRecipe } from './services/recipeService'
+import { Routes,Route } from 'react-router-dom';
+import HomePage from './pages/HomePage';
+import RecipePage from './pages/RecipePage';
+
 
 function App() {
 
@@ -20,10 +24,13 @@ function App() {
 
   return (
     <div>
-      <h1>
-        Recipe Finder
-      </h1>
-      <p>Open the developer console to see the fetch recipe data</p>
+       <Routes>
+        <Route path = "/" element = {<HomePage />} >
+        </Route>
+
+        <Route path='/recipe/:recipeId' element = {<RecipePage />} />
+        
+       </Routes>
     </div>
   )
 }

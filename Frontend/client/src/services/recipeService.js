@@ -18,9 +18,9 @@ const recipeApi = axios.create({
 export const searchRecipe = async (query) => {
     try{
         // const response = await recipeApi.get(`/search.php?s=${query}`)
-        console.log(API_URL);
+        // console.log(API_URL);
         
-        const response = await axios.get(`${API_URL}/search.php?s=${query}`)
+        const response = await recipeApi.get(`${API_URL}/search.php?s=${query}`)
 
 
         return response.data.meals || []; // this check if the response.data.meals is not empty return it if it is return empty array
