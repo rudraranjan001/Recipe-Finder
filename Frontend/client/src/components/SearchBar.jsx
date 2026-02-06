@@ -2,7 +2,7 @@
  
 import React , {useState} from 'react'
 
-export default function SearchBar() {
+export default function SearchBar({ onSearch }) {
 
     const [query,setQuery] = useState('');
 
@@ -14,7 +14,9 @@ export default function SearchBar() {
 
         event.preventDefault();
 
-        console.log('Searching for: ',query);
+        if(query.trim()){
+            onSearch(query);
+        }
         
         setQuery('');
     }
