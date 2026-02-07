@@ -3,6 +3,8 @@ import React from 'react'
 import { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipeById } from '../services/recipeService';
+import Loader from '../components/Loader';
+
 
 export default function RecipePage() {
   //We use the useParams to get the ID from the URL
@@ -11,14 +13,16 @@ export default function RecipePage() {
   //Initialize state for the recipe details. We start with `null` because we don't have a recipe yet.
   const [recipe,setRecipe] = useState(null);
   const [ loading , setLoading ] = useState(true);
-  console.log("URL Params : ",recipeId);
+
+
+  // console.log("URL Params : ",recipeId);
   
   useEffect(() => {
     const fetchRecipeDetails = async () => {
       try{
         setLoading(true); //ensure loading is true at the start of the fetch
         const data = await getRecipeById(recipeId);
-        console.log("API Data:", data);
+        // console.log("API Data:", data);
         if(data.meals){
           setRecipe(data.meals[0]);
         }
@@ -38,7 +42,7 @@ export default function RecipePage() {
       }
     };
     fetchRecipeDetails();//calling async function
-  },[recipeId])
+  },[recipeId ])
 
   //Data Transformation logic
   //Creating the clean array of ingredients from the raw recipe object
@@ -59,7 +63,7 @@ export default function RecipePage() {
  }
   
   if(loading){
-    return<div className="text-center text-2xl mt-16 text-gray-500">Loading recipe...</div>
+    return <Loader />
 
   }
 
