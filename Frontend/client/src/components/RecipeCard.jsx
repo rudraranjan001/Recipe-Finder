@@ -3,9 +3,9 @@ import { Link } from 'react-router-dom';
 
 
 function RecipeCard({recipe}) {
-    const {IdMeal,strMeal , strMealThumb} = recipe;
+    const {idMeal,strMeal , strMealThumb} = recipe;
   return (
-    <Link to = {`/recipe/${IdMeal}`} className='block no-underline text-inherit'> 
+    <Link to = {`/recipe/${idMeal}`} className='block no-underline text-inherit'> 
       <div className='flex flex-col overflow-hidden bg-white border border-[#e0e0e0] rounded-xl shadow-[0_4px_12px_rgba(0,0,0,0.08)] transition-all duration-200 ease-in-out cursor-pointer hover:-translate-y-[5px] hover:shadow-[0_8px_16px_rgba(0,0,0,0.12)]'>
           <img src={strMealThumb} alt = {strMeal} className='w-full h-[200px] object-cover' />
 
