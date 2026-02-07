@@ -32,4 +32,17 @@ export const searchRecipe = async (query) => {
     }
 }
 
+export const getRecipeById = async (id) => {
+    try{
+        const response = await recipeApi.get(`/lookup.php?i=${id}`);
+        
+        return response.data.meals ? response.data.meals[0] : null;
+    }
+    catch(error){
+        console.error(`Error fetching recipe by ID ${id}`);
+        return null;
+        
+    }
+}
+
 export default recipeApi;

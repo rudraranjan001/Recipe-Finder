@@ -29,7 +29,7 @@ function App() {
         </Route>
 
         <Route path='/recipe/:recipeId' element = {<RecipePage />} />
-        
+        {/* The colon (:) in front of recipeId is special. It tells react-router-dom that this part of the path is a parameter */}
        </Routes>
     </div>
   )

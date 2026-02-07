@@ -41,8 +41,6 @@ const HomePage = () => {
                       </p>
       
                     )}
-                
-             
         </div>
         
     );
