@@ -21,13 +21,15 @@ export default function RegisterPage() {
     };
 
   return (
-    <div className='auth-container'>
-        <form  className="auth-form" onSubmit={handleSubmit}>
-            <h2>Create an Account</h2>
+    <div className='flex min-h-[80vh] items-center justify-center bg-[#f9f9f9] p-8'>
+        <form  className="w-full max-w-[400px] rounded-[12px] bg-white p-10 text-center shadow-[0_8px_24px_rgba(0,0,0,0.1)]" onSubmit={handleSubmit}>
+            <h2 className="mb-8 text-2xl text-[#333]">Create an Account</h2>
 
-            <div className="form-group">
+            <div className="mb-6 text-left">
                 <label htmlFor='name'>Name</label>
-                <input 
+                <input   className="w-full rounded-[8px] border border-[#ddd] px-4 py-3 text-base
+             transition-colors focus:border-[#f0a500] focus:outline-none
+             focus:shadow-[0_0_0_2px_rgba(240,165,0,0.2)]"
                     type = "text"
                     id = "name"
                     name = "name"
@@ -40,7 +42,9 @@ export default function RegisterPage() {
 
             <div className="form-group">
                 <label htmlFor='email'>Email Address</label>
-                <input 
+                <input   className="w-full rounded-[8px] border border-[#ddd] px-4 py-3 text-base
+             transition-colors focus:border-[#f0a500] focus:outline-none
+             focus:shadow-[0_0_0_2px_rgba(240,165,0,0.2)]"
                     type = "email"
                     id = "email"
                     name = "email"
@@ -51,9 +55,11 @@ export default function RegisterPage() {
                 />
             </div>
 
-            <div className="form-group">
+            <div className="mb-6 text-left">
                 <label htmlFor='password'>Password</label>
-                <input 
+                <input   className="w-full rounded-[8px] border border-[#ddd] px-4 py-3 text-base
+             transition-colors focus:border-[#f0a500] focus:outline-none
+             focus:shadow-[0_0_0_2px_rgba(240,165,0,0.2)]"
                     type = "password"
                     id = "password"
                     name = "password"
@@ -64,7 +70,8 @@ export default function RegisterPage() {
                 />
             </div>
 
-            <button type = "submit" className='auth-button'>Register</button>
+            <button type = "submit" className='w-full rounded-[8px] bg-[#f0a500] py-[0.8rem] text-[1.1rem] font-bold text-white
+             transition-colors hover:bg-[#d89400]'>Register</button>
         </form>
     </div>
   )
