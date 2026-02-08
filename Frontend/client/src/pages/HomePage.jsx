@@ -18,7 +18,7 @@ const HomePage = () => {
         setSearch(true);
 
         try{
-            const results = await searchRecipes(query);
+            const results = await searchRecipe(query);
             setRecipes(results);
 
         }
