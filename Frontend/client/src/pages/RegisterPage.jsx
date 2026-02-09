@@ -46,7 +46,7 @@ export default function RegisterPage() {
             <h2 className="mb-8 text-2xl text-[#333]">Create an Account</h2>
 
             {/* render the message if it exists */}
-            {error && <p className='error-message'>{error}</p>}
+            {error && <p className='mb-4 rounded-[8px] border border-[#f5c6cb] bg-[#f8d7da] px-5 py-3 text-center text-[#721c24]'>{error}</p>}
 
             <div className="mb-6 text-left">
                 <label htmlFor='name'>Name</label>
@@ -63,7 +63,7 @@ export default function RegisterPage() {
                 />
             </div>
 
-            <div className="form-group">
+            <div className="mb-6 text-left">
                 <label htmlFor='email'>Email Address</label>
                 <input   className="w-full rounded-[8px] border border-[#ddd] px-4 py-3 text-base
              transition-colors focus:border-[#f0a500] focus:outline-none
