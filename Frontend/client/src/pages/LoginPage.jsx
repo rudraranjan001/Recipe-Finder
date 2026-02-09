@@ -26,7 +26,13 @@ function LoginPage() {
         try{
             const data = await login(formData);
             
-            console.log('Logging in with :',formData);
+            console.log('Login Successfull',data);
+            if(data.token){
+                localStorage.setItem('token',data.token);
+
+                console.log('Token saved to localstorage');
+                
+            }
         }
         catch(err){
             const errData = err.response?.data;
