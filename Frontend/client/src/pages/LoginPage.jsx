@@ -29,8 +29,9 @@ function LoginPage() {
             console.log('Logging in with :',formData);
         }
         catch(err){
+            const errData = err.response?.data;
             console.error(err);
-            setError(err.message || 'An unexpected error occurred . Please try again later')
+            setError(errData.message || err.message || 'An unexpected error occurred . Please try again later')
             
         }
         
@@ -84,5 +85,4 @@ function LoginPage() {
     </div>
   )
 }
-
 export default LoginPage
