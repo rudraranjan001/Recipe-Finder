@@ -30,7 +30,13 @@ export default function RegisterPage() {
         try{
 
             const data = await register(formData);
-            console.log('Registering with :', formData);
+            console.log('Registeration successfull :', data);
+
+            if(data.token){
+                localStorage.setItem('token',data.token);
+                console.log('Token saved to localStorage after registration');
+                
+            }
 
         }catch(err){
             console.error(err);
