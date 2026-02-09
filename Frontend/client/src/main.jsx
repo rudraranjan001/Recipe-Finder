@@ -5,12 +5,14 @@ import React from 'react';
 import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
-
+import { AuthProvider } from './context/AuthContext.jsx';
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
     <BrowserRouter>
-        <App />
+        <AuthProvider >
+          <App />
+         </AuthProvider> {/*by wrapping the entire app component within AuthProvider makes the authentication context(user,loading,login,logout) for every components  */}
     </BrowserRouter>
   </StrictMode>,
 )
