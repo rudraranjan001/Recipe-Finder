@@ -42,7 +42,7 @@ function LoginPage() {
         
         <form onSubmit={handleSubmit} className="w-full max-w-[400px] rounded-[12px] bg-white p-10 text-center shadow-[0_8px_24px_rgba(0,0,0,0.1)]">
 
-        <h2 className="mb-8 text-2xl text-[#333]"> Welcome Back🥳 </h2>
+        <h2 className="mb-8 text-2xl text-[#333]"> Welcome Back 😊 </h2>
 
             {error && <p className="mb-4 rounded-[8px] border border-[#f5c6cb] bg-[#f8d7da] px-5 py-3 text-center text-[#721c24]">{error}</p>}
 

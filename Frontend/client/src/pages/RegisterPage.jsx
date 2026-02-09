@@ -24,7 +24,7 @@ export default function RegisterPage() {
     //Make the handleSubmuit function asynx
     const handleSubmit = async (e) => {
 
-        s.preventDefault();
+        e.preventDefault();
         setError(null);
 
         try{
