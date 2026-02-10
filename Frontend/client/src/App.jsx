@@ -6,7 +6,7 @@ import HomePage from './pages/HomePage';
 import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
-
+import Navbar from './components/Navbar';
 
 function App() {
 
@@ -26,6 +26,9 @@ function App() {
 
   return (
     <div>
+      <Navbar /> {/* Render the navbar here,so its always visible*/}
+
+      <main>
        <Routes>
           <Route path = "/" element = {<HomePage />} >
           </Route>
@@ -40,6 +43,7 @@ function App() {
           <Route path = "/register" element = {<RegisterPage />} />
 
        </Routes>
+      </main>
     </div>
   )
 }
