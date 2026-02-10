@@ -12,10 +12,20 @@ const userSchema = new mongoose.Schema(
             type : String,
             required : [true,'Please add an email'],
             unique : true,
+            match:[
+                /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,3})+$/,
+                'Please provide a valid email',
+            ],
         },
         password :{
             type:String,
             required : [true,'Please add a password'],
+            minlength:6,
+        },
+
+        favorites : {
+            type: [String],
+            default: [],
         },
     },
     {
@@ -37,4 +47,10 @@ userSchema.pre('save',async function(next){
     next;
 })
 
-module.exports = mongoose.model('User',userSchema);
+userSchema.methods.matchPassword = async function (enteredPassword) {
+  return await bcrypt.compare(enteredPassword, this.password);
+}
+
+const User = mongoose.model('User',userSchema);
+
+module.exports = User;
