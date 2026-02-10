@@ -1,5 +1,7 @@
-import React,{ useState } from 'react'
-import { login } from '../services/authService';
+import React,{ useState,useContext } from 'react'
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from '../context/AuthContext';
+import { login  as loginService } from '../services/authService';
 
 
 function LoginPage() {
@@ -9,6 +11,9 @@ function LoginPage() {
     });
 
     const [ error , setError ] = useState(null);    
+    const navigate = useNavigate();
+    const { login } = useContext(AuthContext);
+
 
     const handleChange = (e) =>{
         if(error) setError(null);
@@ -24,12 +29,14 @@ function LoginPage() {
         setError(null);
 
         try{
-            const data = await login(formData);
+            const data = await loginService(formData);
             
             console.log('Login Successfull',data);
             if(data.token){
                 localStorage.setItem('token',data.token);
 
+                login(data);//update the global AuthContext state with the user data
+                navigate('/');//Redirect the user to the homapage
                 console.log('Token saved to localstorage');
                 
             }
