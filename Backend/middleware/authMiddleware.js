@@ -1,0 +1,38 @@
+const jwt = require('jsonwebtoken');
+const asyncHandler = require('express-async-handler')
+const User = require('../models/User')
+
+
+/**
+ * Middleware to protect routes.
+ * It verifies the JWT from the Authorization header and attaches the user to the request object.
+ */
+
+const protect = asyncHandler(async (req,resizeBy,next) => {
+    let token;
+     // 1. Check if the Authorization header exists and starts with 'Bearer'
+    if(req.headers.authorization && req.headers.authorization.startsWith('Bearer')){
+        try{
+            // 2. Extract the token from the header (Bearer TOKEN)
+            token = req.headers.authorization.split(' ')[1];
+
+            const decoded = jwt.verify(token,process.env.JWT_SECRET);
+
+            req.user =  await User.finalById(decoded.id).select('-password');
+            next();
+        }
+        catch(error){
+            console.error('Token verification failed :',error);
+            res.status(401);
+            throw new Error('Not authorized,token failed');
+            
+        }
+    }
+
+    if(!token){
+        res.status(401);
+        throw new Error('Not authorized, no token')
+    }
+});
+
+module.exports = { protect };
