@@ -7,11 +7,12 @@ const cors = require('cors');
 connectDB();
 const app = express();
 app.use(cors());
-
+    
 app.use(express.json());
 
 //Routes
 app.use('/api/users',require('./routes/userRoutes'));
+app.use('/api/favorites', require('./routes/favoriteRoutes'));
 //userRoutes handle the request comes to api/users
 
 

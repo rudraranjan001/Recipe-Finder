@@ -8,7 +8,7 @@ const asyncHandler = require('express-async-handler');
 const router = express.Router();
 
 const getFavorites = (req,res) =>{
-    res.send('GET / api/favorites route - This will fetch all the favorite recipes for the logged-in user.')
+    res.send('GET /api/favorites route - This will fetch all the favorite recipes for the logged-in user.')
 };
 
 const addFavorite = asyncHandler(async(req,res) =>{
@@ -50,7 +50,7 @@ router.route('/')
     .get(protect,getFavorites)
     .post(protect,addFavorite);
 
-router.route('/.recipeId')
+router.route('/:recipeId')
     .delete(protect , removeFavorite);
     
 //Export the router so it can be imported and used in our main `server.js` file.
