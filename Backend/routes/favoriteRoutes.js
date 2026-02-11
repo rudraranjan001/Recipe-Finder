@@ -7,9 +7,21 @@ const asyncHandler = require('express-async-handler');
 
 const router = express.Router();
 
-const getFavorites = (req,res) =>{
-    res.send('GET /api/favorites route - This will fetch all the favorite recipes for the logged-in user.')
-};
+//Why we use asyncHandler?
+//We wrap our controller in 'asyncHandler for clean , centralized error management.
+//No request input: the only input  it needs is the req.user object, which is conveniently provided by our middleware
+const getFavorites = asyncHandler(async(req,res) =>{
+    // res.send('GET /api/favorites route - This will fetch all the favorite recipes for the logged-in user.')
+    const user = await User.findById(req.user._id);
+
+    if(user){
+        res.status(200).json(user.favorites);
+    }
+    else{
+        res.status(401);
+        throw new Error('User not found');
+    }
+});
 
 const addFavorite = asyncHandler(async(req,res) =>{
     const { recipeId } = req.body;
