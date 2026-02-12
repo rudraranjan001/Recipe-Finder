@@ -53,10 +53,38 @@ const addFavorite = asyncHandler(async(req,res) =>{
     }
 })
 
-const removeFavorite = (req,res)  => {
+const removeFavorite = asyncHandler(async(req,res)  => {
     const { recipeId }  = req.params;
-    res.send(`DELETE /api/favorites/${recipeId} route`)
-}
+
+    //Use 1findByIdAndUpdate` to find the user and modify their doc in one step
+    //The first argument is the ID of the document to find which we get from our protect middleware
+    const updateUser = await User.findByIdAndUpdate(
+        req.user._id,
+        //The second argument is the update operation.
+        //`$pull` is a Mongoose operator that removes from an existing array
+        // Here, we tell it to pull the `recipeId` from the `favorites` array
+        {
+            $pull: { favorites: recipeId },
+        },
+        {
+            //The third argument is an options object
+            //`new : true` tells Mongoose to return the modified document "after " the update
+            new : true,
+        }
+    );
+    if(updateUser){
+        res.status(200).json({
+            message : 'Recipe removed from favorite successfully',
+            favorites : updateUser.favorites,
+        });
+    }
+    else{
+        res.status(404);
+        throw new Error('User not found');
+    }
+
+    // res.send(`DELETE /api/favorites/${recipeId} route`)
+});
 
 router.route('/')
     .get(protect,getFavorites)
