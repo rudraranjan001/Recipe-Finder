@@ -3,7 +3,7 @@ const express = require('express');
 const connectDB = require('./config/db')
 const colors = require('colors')
 const cors = require('cors');
-const { notFound, errorHandler } = require('./middleware/errorMiddleware'); // Assuming you have this
+// const { notFound, errorHandler } = require('./middleware/errorMiddleware'); // Assuming you have this
 
 const userRoutes = require('./routes/userRoutes');
 const favoriteRoutes = require('./routes/favoriteRoutes');
@@ -19,8 +19,8 @@ app.use('/api/users',userRoutes);
 app.use('/api/favorites', favoriteRoutes);
 //userRoutes handle the request comes to api/users
 
-app.use(notFound);
-app.use(errorHandler);
+// app.use(notFound);
+// app.use(errorHandler);
 
 const port = process.env.PORT || 5002;
 
