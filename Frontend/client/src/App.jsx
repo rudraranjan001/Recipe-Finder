@@ -7,6 +7,8 @@ import RecipePage from './pages/RecipePage';
 import LoginPage from './pages/LoginPage';
 import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/Navbar';
+import FavoritesPage from './pages/FavoritesPage';
+import ProtectedRoute from './components/ProtectedRoute';
 
 function App() {
 
@@ -42,6 +44,19 @@ function App() {
 
           <Route path = "/register" element = {<RegisterPage />} />
 
+          {/* Highlight:Add the new protected route */}
+          {/* This route is for the /favorites path
+                The `element` is wrapped with our ProtectedRoute component */}
+          <Route 
+            path='/favorites'
+            element = {
+              <ProtectedRoute>
+                {/* The FavoritePage is passed as a child for ProtectedRoute. */}
+                <FavoritesPage />
+              </ProtectedRoute>
+            }
+            />
+            
        </Routes>
       </main>
     </div>
