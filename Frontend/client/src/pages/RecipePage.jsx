@@ -1,10 +1,11 @@
 
 import React from 'react'
-import { useState, useEffect } from 'react';
+import { useContext , useState , useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import { getRecipeById } from '../services/recipeService';
 import Loader from '../components/Loader';
-
+import { AuthContext } from '../context/AuthContext';
+import { addFavorite } from '../services/'
 
 export default function RecipePage() {
   //We use the useParams to get the ID from the URL
