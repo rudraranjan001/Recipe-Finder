@@ -1,10 +1,13 @@
 import React from 'react'
 import { useState , useEffect } from 'react'
 import { getFavorites } from '../services/favoriteService'
+import { getRecipeById } from '../services/recipeService';
+import RecipeCard from '../components/RecipeCard';
+
 
 export default function FavoritesPage() {
 
-  const [favoriteIds , setFavoriteIds] = useState([]);
+  const [favoriteRecipes , setFavoriteRecipes] = useState([]);
 
   const [loading , setLoading ] = useState(null);
 
@@ -12,15 +15,23 @@ export default function FavoritesPage() {
 
   useEffect (() => {
     
-    const fetchFavoriteIds = async () => {
+    const fetchFavorites = async () => {
       try{
-        
-        setError(null);
         setLoading(true);
+        setError(null);
+        
 
         const ids = await getFavorites();
+        if(ids.length === 0){
+          setFavoriteIds(ids);
+          return;
+        }
         
-        setFavoriteIds(ids);
+        const recipePromises = await Promise.all(recipePromises);
+        //Use `Promise.all` to wait for All the individual recipe fetches to complete.
+        //This is incredibly efficient as it runs the request in parallel
+
+        setFavoriteRecipes(recipes);
 
       }catch(err){
 
@@ -30,7 +41,7 @@ export default function FavoritesPage() {
         setLoading(false);
       }
     };
-    fetchFavoriteIds();
+    fetchFavorites();
 
   },[])
 
@@ -48,18 +59,15 @@ export default function FavoritesPage() {
             My Favorite Recipes
             
         </h1>
-        {favoriteIds.length === 0 ? (
+        {favoriteRecipes.length === 0 ? (
             <p className='text-[1.1rem] text-[#666]'> You have'nt saved any favorite recipe yet. Start exploring!</p>
         ) : (
-          <div>
-            <p className='text-[1.1rem] text-[#666]'>You have {favoriteIds.length} favorite recipes.</p>
-              <div className="mt-8 p-4 bg-[#f1f1f1] rounded-lg text-left">
-                <h3>(For Debugging) Your Favorite Recipe IDs :</h3>
-                <ul>
-                  {favoriteIds.map(id => <li key = {id}>{id}</li>)}
-                </ul>
+           
+              <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-8 py-8">
+                {favoriteRecipes.map(recipe => (
+                  <RecipeCard key = {recipe.idMeal} recipe = {recipe} />
+                ))}
               </div>
-          </div>
         )}
         
     </div>
