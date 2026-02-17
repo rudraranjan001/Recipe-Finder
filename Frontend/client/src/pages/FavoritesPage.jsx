@@ -23,6 +23,7 @@ export default function FavoritesPage() {
 
         const ids = await getFavorites();
         if(ids.length === 0){
+          setFavoriteRecipes([]);
           setLoading(false);
 
           return;
@@ -35,6 +36,7 @@ export default function FavoritesPage() {
         //Use `Promise.all` to wait for All the individual recipe fetches to complete.
         //This is incredibly efficient as it runs the request in parallel
 
+        //Update our state with the final array of full recipe objects.
         setFavoriteRecipes(recipes);
 
       }catch(err){
@@ -73,7 +75,6 @@ export default function FavoritesPage() {
                 ))}
               </div>
         )}
-        
     </div>
   )
 }
