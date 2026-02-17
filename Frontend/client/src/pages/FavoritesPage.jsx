@@ -23,11 +23,15 @@ export default function FavoritesPage() {
 
         const ids = await getFavorites();
         if(ids.length === 0){
-          setFavoriteIds(ids);
+          setLoading(false);
+
           return;
         }
         
-        const recipePromises = await Promise.all(recipePromises);
+        const recipePromises = ids.map((id) => getRecipeById(id));
+        const recipes = await Promise.all(recipePromises);
+        
+
         //Use `Promise.all` to wait for All the individual recipe fetches to complete.
         //This is incredibly efficient as it runs the request in parallel
 
