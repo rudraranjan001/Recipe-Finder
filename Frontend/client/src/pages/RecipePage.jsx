@@ -5,7 +5,7 @@ import { useParams } from 'react-router-dom';
 import { getRecipeById } from '../services/recipeService';
 import Loader from '../components/Loader';
 import { AuthContext } from '../context/AuthContext';
-import { addFavorite } from '../services/'
+import { addFavorite } from '../services/favoriteService';
 
 export default function RecipePage() {
   //We use the useParams to get the ID from the URL
@@ -14,7 +14,9 @@ export default function RecipePage() {
   //Initialize state for the recipe details. We start with `null` because we don't have a recipe yet.
   const [recipe,setRecipe] = useState(null);
   const [ loading , setLoading ] = useState(true);
+  const {user} = useContext(AuthContext);//Consume the AuthContext to get the user status
 
+  const [feedback , setFeedback] = useState({ message: '', type: ''});
 
   // console.log("URL Params : ",recipeId);
   
@@ -44,6 +46,19 @@ export default function RecipePage() {
     };
     fetchRecipeDetails();//calling async function
   },[recipeId ])
+
+  const handleSaveToFavorites = async() => {
+    setFeedback({ message: '',type: ''});
+
+    try{
+      const response = await addFavorite(recipe.idMeal);
+      setFeedback({ message: response.message || 'Saved to favorites!.',type: 'success'});
+    }catch(err){
+      setFeedback({ message: err.message || 'Failed to save favorite.', type: 'error' });
+    }
+  };
+
+  
 
   //Data Transformation logic
   //Creating the clean array of ingredients from the raw recipe object
@@ -87,6 +102,28 @@ export default function RecipePage() {
 
           </div>
           
+          {/* --- HIGHLIGHT: Add the button and feedback message with conditional rendering --- */}
+      {/* This is the core of our conditional UI. The button will only be rendered
+          if the `user` object exists (i.e., the user is logged in). */}
+      {user && (
+        <div className="my-6 text-center">
+          <button onClick={handleSaveToFavorites} className="px-6 py-3 text-[1.1rem] font-semibold text-white bg-[#f0a500] border-0 rounded-lg cursor-pointer transition-all duration-200 hover:bg-[#d89400] hover:-translate-y-0.5">
+            Save to Favorites
+          </button>
+        </div>
+      )}
+
+      {/* This element will render our success or error message. */}
+      {feedback.message && (
+        <p className={`text-center p-3 my-4 rounded-lg font-medium border ${
+            feedback.type === "success"
+              ? "bg-[#d4edda] text-[#155724] border-[#c3e6cb]"
+              : "bg-[#f8d7da] text-[#721c24] border-[#f5c6cb]"
+            }`}>
+          {feedback.message}
+        </p>
+      )}
+
           <div className="flex-1 min-w-[300px]">
 
             <h2 className="text-2xl text-gray-700 border-b-2 border-orange-400 pb-2 mb-4">Ingredients</h2>
