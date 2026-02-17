@@ -52,7 +52,7 @@ export default function FavoritesPage() {
             <p className='text-[1.1rem] text-[#666]'> You have'nt saved any favorite recipe yet. Start exploring!</p>
         ) : (
           <div>
-            <p className='text-[1.1rem] text-[#666]'>You have {favoriteIdslength} favorite recipes.</p>
+            <p className='text-[1.1rem] text-[#666]'>You have {favoriteIds.length} favorite recipes.</p>
               <div className="mt-8 p-4 bg-[#f1f1f1] rounded-lg text-left">
                 <h3>(For Debugging) Your Favorite Recipe IDs :</h3>
                 <ul>
