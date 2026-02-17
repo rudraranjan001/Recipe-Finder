@@ -1,6 +1,6 @@
 import React from 'react'
 import { useState , useEffect } from 'react'
-import { getFavorites } from '../services/favoriteService'
+import { getFavorites,removeFavorite } from '../services/favoriteService'
 import { getRecipeById } from '../services/recipeService';
 import RecipeCard from '../components/RecipeCard';
 
@@ -51,6 +51,19 @@ export default function FavoritesPage() {
 
   },[])
 
+  const handleRemoveFavorite = async (recipeId) => {
+    try{
+      await removeFavorite(recipeId);
+      setFavoriteRecipes((prevRecipes) => 
+        prevRecipes.filter((recipe) => recipe.idMeal !== recipeId)
+      );
+    }catch(err){
+      console.error('Failed to remove favorite :',err);
+      alert(err.message || 'Could not remove favorite. Please try again later.')
+      
+    }
+  }
+
   if(loading){
     return <div className="text-center mt-16 text-[1.2rem] text-[#555]">Loading your favorite recipes....</div>
   }
@@ -71,7 +84,15 @@ export default function FavoritesPage() {
            
               <div className="grid grid-cols-[repeat(auto-fill,minmax(250px,1fr))] gap-8 py-8">
                 {favoriteRecipes.map(recipe => (
-                  <RecipeCard key = {recipe.idMeal} recipe = {recipe} />
+                  <div key = {recipe.idMeal} className='relative flex flex-col'>
+                      <RecipeCard  recipe = {recipe} />
+                      <button 
+                        onClick={() => handleRemoveFavorite(recipe.idMeal)}
+                        className='z-[2] mt-[-8px] w-full cursor-pointer rounded-b-[12px] border-0 bg-[#dc3545] px-0 py-[0.6rem] font-semibold text-white transition-colors duration-200 hover:bg-[#c82333]'
+                      >
+                        Remove
+                      </button>
+                  </div>
                 ))}
               </div>
         )}
