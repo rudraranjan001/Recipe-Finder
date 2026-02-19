@@ -12,7 +12,15 @@ import {
 function RecipeCard({recipe}) {
     const {idMeal,strMeal , strMealThumb} = recipe;
   return (
-    <Card sx={{ height: '100%', display: 'flex', flexDirection: 'column' }}>
+    <Card
+      sx={{
+        height: '100%',
+        display: 'flex',
+        flexDirection: 'column',
+        maxWidth: 260,
+        mx: 'auto',
+      }}
+    >
 
     <CardActionArea 
       component= {Link}
@@ -22,7 +30,7 @@ function RecipeCard({recipe}) {
 
         <CardMedia
           component="img"
-          height="200"
+          height="160"
           image={recipe.strMealThumb}
           alt={recipe.strMeal}
         />

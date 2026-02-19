@@ -13,15 +13,15 @@ const HomePage = () => {
     const [searched,setSearched] = useState(false);
     const [ loading,setLoading ] = useState(false);
 
-    const handleSearch = async(query) => {
+    const handleSearch = async (e) => {
 
         // setIsLoading(true);
         // setSearch(true);
-        if(e) e.preventDefault();
-        if(!query) return;
+        if (e) e.preventDefault();
+        if (!query.trim()) return;
         
         setLoading(true);
-        const results = await searchRecipe(query);
+        const results = await searchRecipe(query.trim());
         setRecipes(results || []);
         setSearched(true);
         setLoading(false);
