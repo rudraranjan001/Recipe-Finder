@@ -1,34 +1,54 @@
  
  
 import React , {useState} from 'react'
+import { Box, TextField , Button } from '@mui/material';
 
-export default function SearchBar({ onSearch }) {
+export default function SearchBar({ query,setQuery, handleSearch }) {
 
-    const [query,setQuery] = useState('');
+    // const [query,setQuery] = useState('');
 
-    const handleInputChange = (event) => {
-        setQuery(event.target.value);
-    }
+    // const handleInputChange = (event) => {
+    //     setQuery(event.target.value);
+    // }
 
-    const handleSubmit = (event) => {
+    // const handleSubmit = (event) => {
 
-        event.preventDefault();
+    //     event.preventDefault();
 
-        if(query.trim()){
-            onSearch(query);
-        }
+    //     if(query.trim()){
+    //         onSearch(query);
+    //     }
         
-        setQuery('');
-    }
+    //     setQuery('');
+    // }
   return (
-     <form onSubmit={handleSubmit} >
-        <input  type = "text" placeholder='Search for a recipe'
-        value = {query}
+      <Box
+      component="form"
+      onSubmit={handleSearch}
+      sx={{
+        display: 'flex',
+        alignItems: 'center',
+        gap: 2,
+        marginBottom: 4,
+      }}
+      >
+        <TextField
+            variant="outlined"
 
-        onChange={handleInputChange}
+            label="Search for a recipe..."
+            fullWidth
+            value={query}
+            onChange={(e) => setQuery(e.target.value)}
         />
-        <button type='submit'>Search</button>
-     </form>
-    
+
+        <Button 
+        type='submit'
+        variant='contained'
+        color='primary'
+        sx={{height: '56px', padding: '0 30px'}}
+        >
+            Search
+        </Button>
+      </Box>
   )
 }

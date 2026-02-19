@@ -6,14 +6,14 @@ import ReactDOM from 'react-dom/client'
 import App from './App.jsx'
 import { BrowserRouter } from 'react-router-dom';
 import { AuthProvider } from './context/AuthContext.jsx';
-import { ThemeProvider , createTheme } from '@mui/material';
-import CssBaseline from '@mui/material';
+import { ThemeProvider , createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
 
 const theme = createTheme({});
 const root = createRoot(document.getElementById('root'));
 
 root.render(
-  <StrictMode>
+  <React.StrictMode>
     <BrowserRouter>
       <ThemeProvider theme = {theme}>
         <CssBaseline />
@@ -21,7 +21,6 @@ root.render(
           <App />
          </AuthProvider> {/*by wrapping the entire app component within AuthProvider makes the authentication context(user,loading,login,logout) for every components  */}
       </ThemeProvider>
-
     </BrowserRouter>
-  </StrictMode>,
+  </React.StrictMode>,
 )
