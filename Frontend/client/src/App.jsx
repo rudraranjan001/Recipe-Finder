@@ -11,6 +11,7 @@ import FavoritesPage from './pages/FavoritesPage';
 import ProtectedRoute from './components/ProtectedRoute';
 import Footer from './components/Footer';
 import { Box } from '@mui/material';
+import NotFoundPage from './pages/NotFoundPage';
 
 function App() {
 
@@ -59,7 +60,7 @@ function App() {
               </ProtectedRoute>
             }
             />
-            
+            <Route path= "*" element= {<NotFoundPage />} />
        </Routes>
       </main>
       <Footer />
