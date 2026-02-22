@@ -7,6 +7,7 @@ import Loader from '../components/Loader';
 import { AuthContext } from '../context/AuthContext';
 import { addFavorite } from '../services/favoriteService';
 import { Container , Grid , Box , Typography , Button , Stack , Alert } from '@mui/material';
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function RecipePage() {
   //We use the useParams to get the ID from the URL
@@ -81,7 +82,7 @@ export default function RecipePage() {
 //  }
   
   if(loading){
-    return <Typography>Loading recipe...</Typography>
+    return <LoadingSpinner />
 
   }
 
