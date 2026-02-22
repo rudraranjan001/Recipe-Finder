@@ -3,7 +3,7 @@ import { useState , useEffect } from 'react'
 import { getFavorites,removeFavorite } from '../services/favoriteService'
 import { getRecipeById } from '../services/recipeService';
 import RecipeCard from '../components/RecipeCard';
-
+import LoadingSpinner from '../components/LoadingSpinner';
 
 export default function FavoritesPage() {
 
@@ -65,7 +65,7 @@ export default function FavoritesPage() {
   }
 
   if(loading){
-    return <div className="text-center mt-16 text-[1.2rem] text-[#555]">Loading your favorite recipes....</div>
+    return <LoadingSpinner />
   }
 
   if(error){
