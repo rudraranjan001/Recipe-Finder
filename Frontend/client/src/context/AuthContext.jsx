@@ -1,11 +1,12 @@
 import React,{ createContext , useState , useEffect , useContext } from 'react'
 import { useNavigate } from 'react-router-dom';
+import { login as loginService } from '../services/authService';
 
 const parseJwt = (token) =>{
     try{
 
-        // btoa() → encode to Base64
-        // atob() → decode from Base64
+        // btoa() -> encode to Base64
+        // atob() -> decode from Base64
         return JSON.parse(atob(token.split('.')[1]));
     }
     catch(e){
@@ -13,6 +14,20 @@ const parseJwt = (token) =>{
         return null;
     }
 }
+
+const mapUserFromToken = (token) => {
+    const decodedUser = parseJwt(token);
+
+    if (!decodedUser || decodedUser.exp * 1000 <= Date.now()) {
+        return null;
+    }
+
+    return {
+        id: decodedUser.id,
+        name: decodedUser.name,
+        email: decodedUser.email,
+    };
+};
 
 export const AuthContext = createContext(null);
 
@@ -28,19 +43,13 @@ export const AuthProvider = ({ children }) => {
 
     useEffect(() => {
         const token = localStorage.getItem('token');
+
         if(token){
+            const parsedUser = mapUserFromToken(token);
 
-            //In an production app, you would make an API call to your backend  here to verify the token is still valid.
-            const decodeUser = parseJwt(token);
-
-            if(decodeUser && decodeUser.exp * 1000 > Date.now()){
-                setUser({
-                    id:decodeUser.id,
-                    name:decodeUser.name,
-                    email:decodeUser.email,
-                });
-            }
-            else{
+            if (parsedUser) {
+                setUser(parsedUser);
+            } else {
                 localStorage.removeItem('token');
             }
         }
@@ -48,8 +57,23 @@ export const AuthProvider = ({ children }) => {
         setLoading(false);
     },[]);
 
-    const login = (userData) => {
-        setUser(userData);
+    const login = async (email, password) => {
+        const data = await loginService({ email, password });
+
+        if (!data?.token) {
+            throw new Error('Invalid login response from server.');
+        }
+
+        const parsedUser = mapUserFromToken(data.token);
+
+        if (!parsedUser) {
+            throw new Error('Invalid or expired token received.');
+        }
+
+        localStorage.setItem('token', data.token);
+        setUser(parsedUser);
+
+        return data;
     };
 
     const logout = () => {
@@ -71,6 +95,3 @@ export const AuthProvider = ({ children }) => {
         </AuthContext.Provider>
     )
 };
-    
-
-

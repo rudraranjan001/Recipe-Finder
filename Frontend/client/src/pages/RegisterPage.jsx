@@ -1,8 +1,10 @@
 import React,{useState} from 'react'
 import { register } from '../services/authService';
+import { useNavigate } from 'react-router-dom';
 
 export default function RegisterPage() {
 
+    const navigate = useNavigate();
     const [formData , setFormData] = useState({
         name : '',
         email : '',
@@ -29,21 +31,21 @@ export default function RegisterPage() {
 
         try{
 
-            const data = await register(formData);
-            console.log('Registeration successfull :', data);
+            await register(formData);
 
-            if(data.token){
-                localStorage.setItem('token',data.token);
-                console.log('Token saved to localStorage after registration');
-                
-            }
+            navigate('/login',{
+                state : {
+                    registrationMessage: 'Registration successful. Please login',
+                    registeredEmail: formData.email,
+                }
+            })
 
         }catch(err){
             console.error(err);
             setError(err.message || 'An unexpected error occured.Pleass try again later')
-            
+
         }
-        
+
     };
 
   return (
