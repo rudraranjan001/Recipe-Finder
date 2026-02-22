@@ -9,6 +9,8 @@ import RegisterPage from './pages/RegisterPage';
 import Navbar from './components/Navbar';
 import FavoritesPage from './pages/FavoritesPage';
 import ProtectedRoute from './components/ProtectedRoute';
+import Footer from './components/Footer';
+import { Box } from '@mui/material';
 
 function App() {
 
@@ -27,10 +29,11 @@ function App() {
   },[]);
 
   return (
-    <div>
+     <Box sx={{ display: 'flex', flexDirection: 'column', minHeight: '100vh' }}>
+     
       <Navbar /> {/* Render the navbar here,so its always visible*/}
 
-      <main>
+      <main style = {{flexGrow: 1}}>
        <Routes>
           <Route path = "/" element = {<HomePage />} >
           </Route>
@@ -59,7 +62,8 @@ function App() {
             
        </Routes>
       </main>
-    </div>
+      <Footer />
+    </Box>
   )
 }
 
