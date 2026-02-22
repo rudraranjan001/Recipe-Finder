@@ -23,7 +23,7 @@ export default function Navbar() {
       <ul className="m-0 flex list-none items-center gap-6 p-0">
         {user ? (
           <>
-            <li className="font-medium text-[#555]">Welcome, {user.name}!</li>
+            <li className="font-medium text-[#555]">Welcome {user.name}</li>
             <li>
               <Link to="/favorites" className={navLinkClass}>
                 My Favorites

@@ -59,7 +59,7 @@ export const AuthProvider = ({ children }) => {
 
     const login = async (email, password) => {
         const data = await loginService({ email, password });
-
+        
         if (!data?.token) {
             throw new Error('Invalid login response from server.');
         }
