@@ -3,7 +3,8 @@ import SearchBar from '../components/SearchBar';
 //This is the page where all the user search for the recipes
 import { searchRecipe } from '../services/recipeService';
 import RecipeCard from '../components/RecipeCard';
-import Loader from '../components/Loader';
+// import LoadingSpinne from '../components/Loader';
+import LoadingSpinner from '../components/LoadingSpinner';
 import { Container , Grid , Typography , Box } from '@mui/material';
 
 const HomePage = () => {
@@ -85,19 +86,20 @@ const HomePage = () => {
 
             <SearchBar query={query} setQuery={setQuery} handleSearch={handleSearch} />
 
-            <Grid container spacing={4} sx={{mt:4}}>
-                {loading ? (
-                    <Box sx = {{display: 'flex',justifyContent: 'center', width:'100%'}}>
-                        <Typography>Loading...</Typography>
-                    </Box>
-                ):(
-                    recipes.map((recipe) => (
-                        <Grid item key={recipe.idMeal} xs={12} sm={6} md={4} lg={3}>
-                            <RecipeCard recipe={recipe} />
-                        </Grid>
-                    ))
-                )}
-            </Grid>
+            
+            {loading ? (
+                // Instead of plain text, render your sophisticated spinner component.
+                <LoadingSpinner />
+            ) : (
+                // The rest of your grid rendering logic remains unchanged.
+                <Grid container spacing={4} sx={{ mt: 4 }}>
+                {recipes.map((recipe) => (
+                    <Grid item key={recipe.idMeal} xs={12} sm={6} md={4} lg={3}>
+                    <RecipeCard recipe={recipe} />
+                    </Grid>
+                ))}
+                </Grid>
+            )}
             
                 {searched && !loading && recipes.length === 0 &&(
                     <Typography align="center" sx={{ mt: 4}}>
