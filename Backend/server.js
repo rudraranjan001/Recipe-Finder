@@ -35,4 +35,4 @@ app.post('/post',(req,res) => {
 })
 
 
-app.listen(port,() => console.log(`Server running on port ${port}`.yellow.bold));
+app.listen(port);
