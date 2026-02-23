@@ -8,7 +8,7 @@ A full-stack MERN application that allows users to search for recipes from a vas
 
 ## About The Project
 
-![Recipe Finder Screenshot](https://via.placeholder.com/800x450.png?text=Add+a+Screenshot+of+Your+App+Here!)
+https://github.com/rudraranjan001/Recipe-Finder/blob/main/Frontend/client/src/assets/Screenshot%202026-02-23%20191245.png
 
  
 
