@@ -5,7 +5,7 @@ import { getRecipeById } from '../services/recipeService';
 import RecipeCard from '../components/RecipeCard';
 import LoadingSpinner from '../components/LoadingSpinner';
 import ErrorComponent from '../components/ErrorComponent';
-import { Container , Grid , Typography } from '@mui/material';
+import { Container , Grid , Typography, Button } from '@mui/material';
 
 
 export default function FavoritesPage() {
