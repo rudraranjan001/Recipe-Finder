@@ -110,6 +110,6 @@ You need to have the following software installed on your machine:
 
 ## Contact
 
-Your Name - [your.email@example.com](mailto:your.email@example.com)
+Your Name - [your.email@example.com](mailto:rudraranjan2003@gmail.com)
 
-Project Link: [https://github.com/your-username/your-repo-name](https://github.com/your-username/your-repo-name)
+Project Link: [https://github.com/your-username/your-repo-name](https://recipe-finder-taupe-rho.vercel.app/)
